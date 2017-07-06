@@ -609,55 +609,104 @@ int main()
 	pthread_t thread1, thread2;
 	void *q = NULL;
 	pthread_create(&thread1, NULL, listen1, &q);
-
+	int count_mark = 0;
 	while (c == 'y')
 	{
 		printf("0-Retrieve contents from metadata\n1-Upload a file\n2-Update a file\n3-Delete a file\n4-Add messages to a file\n5-Delete a message\n6-Edit a message\n7-View Messages\n8-Download file\n9-Delete a message\n10-Delete a file\n");
 		scanf("%d", &choice);
 		if (choice == 0)
 		{
+			count_mark++;
 			retrieveContents(fp, fp1);
 			
 		}
 
 		else if (choice == 1)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, uploadFile, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 2)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, updateFile, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 4)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, addMessagesToFile, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 7)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 
 			pthread_create(&thread2, NULL, viewMessages, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 6)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, editMessage, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 8)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, downloadFile, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 9)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, deleteMessage, &q);
 			pthread_join(thread2, NULL);
 		}
 		else if (choice == 10)
 		{
+			if (count_mark == 0)
+			{
+				int flag = 0;
+				send(new_socket, (char *)&flag, sizeof(flag), 0);
+				count_mark++;
+			}
 			pthread_create(&thread2, NULL, deleteFile, &q);
 			pthread_join(thread2, NULL);
 		}
